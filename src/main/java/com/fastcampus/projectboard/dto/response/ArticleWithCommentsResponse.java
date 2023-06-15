@@ -47,7 +47,8 @@ public record ArticleWithCommentsResponse(
         );
     }
 
-    private static Set<ArticleCommentResponse> organizeChildComments(Set<ArticleCommentDto> dtos){
+
+    private static Set<ArticleCommentResponse> organizeChildComments(Set<ArticleCommentDto> dtos) {
         Map<Long, ArticleCommentResponse> map = dtos.stream()
                 .map(ArticleCommentResponse::from)
                 .collect(Collectors.toMap(ArticleCommentResponse::id, Function.identity()));
@@ -61,13 +62,12 @@ public record ArticleWithCommentsResponse(
 
         return map.values().stream()
                 .filter(comment -> !comment.hasParentComment())
-                .collect(Collectors.toCollection(()->
+                .collect(Collectors.toCollection(() ->
                         new TreeSet<>(Comparator
                                 .comparing(ArticleCommentResponse::createdAt)
                                 .reversed()
                                 .thenComparingLong(ArticleCommentResponse::id)
                         )
-                        ));
+                ));
     }
-
 }
