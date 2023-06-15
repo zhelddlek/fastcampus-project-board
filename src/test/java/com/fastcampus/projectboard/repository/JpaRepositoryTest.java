@@ -89,7 +89,7 @@ class JpaRepositoryTest {
         assertThat(savedArticle.getHashtags())
                 .hasSize(1)
                 .extracting("hashtagName", String.class)
-                .containsExactly(updatedHashtag.getHashtagName());
+                        .containsExactly(updatedHashtag.getHashtagName());
     }
 
     @DisplayName("delete 테스트")
@@ -203,7 +203,7 @@ class JpaRepositoryTest {
         assertThat(articlePage.getContent().get(0).getTitle()).isEqualTo("Fusce posuere felis sed lacus.");
         assertThat(articlePage.getContent().get(0).getHashtags())
                 .extracting("hashtagName", String.class)
-                .containsExactly("fuscia");
+                        .containsExactly("fuscia");
         assertThat(articlePage.getTotalElements()).isEqualTo(17);
         assertThat(articlePage.getTotalPages()).isEqualTo(4);
     }
